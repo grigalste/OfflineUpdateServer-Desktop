@@ -128,13 +128,13 @@ done
 			yum check-update ;
 			yum -y install nginx ;
 			systemctl enable nginx ;
-			if [ -f /etc/nginx/sites-enabled/default ]; then
-				rm /etc/nginx/sites-enabled/default;
+			if [ -f /etc/nginx/conf.d/default ]; then
+				rm /etc/nginx/conf.d/default;
 			fi
-			if [ ! -f /etc/nginx/sites-available/r7-office.conf ]; then
-				mv r7-office.conf /etc/nginx/sites-available/r7-office.conf;
+			if [ ! -f /etc/nginx/conf.d/r7-office.conf ]; then
+				mv r7-office.conf /etc/nginx/conf.d/r7-office.conf;
 			fi
-			ln -s /etc/nginx/sites-available/r7-office.conf /etc/nginx/sites-enabled/
+			ln -s /etc/nginx/conf.d/r7-office.conf /etc/nginx/conf.d/
 			systemctl restart nginx ;
 		else
 			echo "Not supported OS";

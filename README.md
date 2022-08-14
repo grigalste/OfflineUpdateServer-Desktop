@@ -1,14 +1,13 @@
 # Локальный сервер обновлений для Десктопа
-
 Скрипт создает локальную копию сервера обновлений.
 
-Используйте: updateserver.sh [PARAMETER] [[PARAMETER], ...]
-	Параметры:
-		domain, --domain	задает адрес будущего сервера обновления, в формате http://domain.name;
+    Используйте updateserver.sh [PARAMETER] [[PARAMETER], ...]
+    Параметры:
+        domain, --domain	задает адрес будущего сервера обновления, в формате http://domain.name;
 		nginx,  --nginx		используйте для установки NGINX (true|false);
 		cron,   --cron		используйте для добавления правила в CRON (true|false);
 		-?, -h, --help		справка.
-       
+   
 ## Пример
 ### Создать локальный сервер обновления доступного по адресу `http://domain.name`:
 		bash updateserver.sh --domain http://domain.name

@@ -32,10 +32,8 @@ while [ "$1" != "" ]; do
 		;;
 		
 		cron | --cron )
-			echo CRON;
 			if [ "$2" == "true" ]; then
 				CRON="true";
-				echo $CRON;
 				shift
 			fi
 		;;
@@ -56,7 +54,7 @@ while [ "$1" != "" ]; do
 done
 
 	if [ "$NEW_UPDATER" == "" ] ; then
-		echo -e "Укажите адрес в формате https://domane.name или http://x.x.x.x";
+		echo -e "Укажите адрес в формате https://domain.name или http://x.x.x.x";
 		read -p "Введите адрес сервера: " NEW_UPDATER
 	fi
 	
@@ -128,13 +126,12 @@ done
 			yum check-update ;
 			yum -y install nginx ;
 			systemctl enable nginx ;
-			if [ -f /etc/nginx/conf.d/default ]; then
-				rm /etc/nginx/conf.d/default;
-			fi
-			if [ ! -f /etc/nginx/conf.d/r7-office.conf ]; then
-				mv r7-office.conf /etc/nginx/conf.d/r7-office.conf;
-			fi
-			ln -s /etc/nginx/conf.d/r7-office.conf /etc/nginx/conf.d/
+#			if [ -f /etc/nginx/conf.d/default ]; then
+#				rm /etc/nginx/conf.d/default;
+#			fi
+#			if [ ! -f /etc/nginx/conf.d/r7-office.conf ]; then
+#				mv r7-office.conf /etc/nginx/conf.d/r7-office.conf;
+#			fi
 			systemctl restart nginx ;
 		else
 			echo "Not supported OS";
@@ -146,10 +143,10 @@ done
 	if [ "$CRON" == "true" ] ; then
 		systemctl enable cron ;
 		if [ -d /usr/local/bin/ ]; then
-			cp ${PWD_OLD}/$0 /usr/local/bin/$0
+			cp -f ${PWD_OLD}/$0 /usr/local/bin/$0
 			if [ -f /usr/local/bin/$0 ]; then
 				chmod +x /usr/local/bin/$0
-				echo "0 0	* * *	root	bash /usr/local/bin/$0 --domain $(echo $NEW_UPDATER | tr -d "\\/")" >> /etc/crontab
+				echo "0 0 * * *	root	bash /usr/local/bin/$0 --domain $NEW_UPDATER " >> /etc/crontab
 			fi
 		fi
 	fi

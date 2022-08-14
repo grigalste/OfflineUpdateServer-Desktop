@@ -102,36 +102,36 @@ done
 			apt-get update;
 			apt-get install nginx -y ;
 			systemctl enable nginx ;
-			if [ -f /etc/nginx/sites-enabled.d/default ]; then
-				rm /etc/nginx/sites-enabled.d/default;
-			fi
-			if [ ! -f /etc/nginx/sites-available.d/r7-office.conf ]; then
-				mv r7-office.conf /etc/nginx/sites-available.d/r7-office.conf;
-			fi
+				if [ -f /etc/nginx/sites-enabled.d/default ]; then
+					rm /etc/nginx/sites-enabled.d/default;
+				fi
+				if [ ! -f /etc/nginx/sites-available.d/r7-office.conf ]; then
+					mv r7-office.conf /etc/nginx/sites-available.d/r7-office.conf;
+				fi
 			ln -s /etc/nginx/sites-available.d/r7-office.conf /etc/nginx/sites-enabled.d/
 			systemctl restart nginx ;		
 		elif [ -f /etc/debian_version ] ; then
 			apt-get update;
 			apt-get install nginx -y ;
 			systemctl enable nginx ;
-			if [ -f /etc/nginx/sites-enabled/default ]; then
-				rm /etc/nginx/sites-enabled/default;
-			fi
-			if [ ! -f /etc/nginx/sites-available/r7-office.conf ]; then
-				mv r7-office.conf /etc/nginx/sites-available/r7-office.conf;
-			fi
+				if [ -f /etc/nginx/sites-enabled/default ]; then
+					rm /etc/nginx/sites-enabled/default;
+				fi
+				if [ ! -f /etc/nginx/sites-available/r7-office.conf ]; then
+					mv r7-office.conf /etc/nginx/sites-available/r7-office.conf;
+				fi
 			ln -s /etc/nginx/sites-available/r7-office.conf /etc/nginx/sites-enabled/
 			systemctl restart nginx ;
 		elif [ -f /etc/redhat-release ] ; then
 			yum check-update ;
 			yum -y install nginx ;
 			systemctl enable nginx ;
-#			if [ -f /etc/nginx/conf.d/default ]; then
-#				rm /etc/nginx/conf.d/default;
-#			fi
-#			if [ ! -f /etc/nginx/conf.d/r7-office.conf ]; then
-#				mv r7-office.conf /etc/nginx/conf.d/r7-office.conf;
-#			fi
+	#			if [ -f /etc/nginx/conf.d/default ]; then
+	#				rm /etc/nginx/conf.d/default;
+	#			fi
+	#			if [ ! -f /etc/nginx/conf.d/r7-office.conf ]; then
+	#				mv r7-office.conf /etc/nginx/conf.d/r7-office.conf;
+	#			fi
 			systemctl restart nginx ;
 		else
 			echo "Not supported OS";
